@@ -4,7 +4,7 @@ import { View, ViewStyle, StyleSheet } from 'react-native';
 interface Style {
 	container: ViewStyle;
 }
-const CardSection: React.StatelessComponent<Style> = ({ children }) => <View style={styles.container}>{children}</View>;
+const CardSection: React.StatelessComponent<{}> = ({ children }) => <View style={styles.container}>{children}</View>;
 
 const styles = StyleSheet.create<Style>({
 	container: {

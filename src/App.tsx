@@ -4,6 +4,7 @@ import firebase from 'firebase';
 
 import config from './config';
 import Header from './components/Header';
+import LoginForm from './components/LoginForm';
 
 export default class App extends Component {
 	componentWillMount() {
@@ -14,6 +15,7 @@ export default class App extends Component {
 		return (
 			<View style={styles.container}>
 				<Header text="Authentication" />
+				<LoginForm />
 			</View>
 		);
 	}

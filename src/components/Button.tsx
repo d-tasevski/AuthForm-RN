@@ -8,10 +8,10 @@ interface Style {
 	buttonText: TextStyle;
 }
 
-type Props = {
+interface Props {
 	text: string;
 	onPress: any; // Figure out how to make function type
-};
+}
 
 const Button = ({ text, onPress }: Props) => (
 	<TouchableOpacity onPress={onPress} style={styles.button}>
