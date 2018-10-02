@@ -4,8 +4,8 @@ module.exports = {
 		es6: true,
 		jest: true,
 	},
-	extends: 'airbnb',
-	parser: 'babel-eslint',
+	extends: ['airbnb', 'tslint-react-recommended'],
+	parser: 'typescript-eslint-parser',
 	parserOptions: {
 		ecmaFeatures: {
 			experimentalObjectRestSpread: true,

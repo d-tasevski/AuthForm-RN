@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
+		"test": "jest",
+		"lint": "tslint -p \".\" -t stylish"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.1.2",
@@ -29,7 +30,12 @@
 		"jest": "23.6.0",
 		"metro-react-native-babel-preset": "0.47.0",
 		"react-test-renderer": "16.5.0",
-		"ts-jest": "^23.10.3"
+		"ts-jest": "^23.10.3",
+		"tslint": "^5.11.0",
+		"tslint-eslint-rules": "^5.4.0",
+		"tslint-react": "^3.6.0",
+		"tslint-react-recommended": "^1.0.15",
+		"typescript-eslint-parser": "^19.0.2"
 	},
 	"jest": {
 		"preset": "react-native",
