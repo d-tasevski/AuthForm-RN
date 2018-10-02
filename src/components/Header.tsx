@@ -1,7 +1,11 @@
 import React from 'react';
-import { Text, View, ViewStyle, TextStyle, StyleSheet } from 'react-native';
+import {
+	Text, View, ViewStyle, TextStyle, StyleSheet,
+} from 'react-native';
 
-type Props = { text: string };
+interface Props {
+	text: string;
+}
 
 interface Style {
 	viewStyle: ViewStyle;
