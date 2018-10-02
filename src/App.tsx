@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
+import firebase from 'firebase';
 
+import config from './config';
 import Header from './components/Header';
 
 export default class App extends Component {
+	componentWillMount() {
+		firebase.initializeApp(config.firebaseConfig);
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
