@@ -6,11 +6,13 @@ import Button from './Button';
 import Card from './Card';
 import Input from './Input';
 import CardSection from './CardSection';
+import Spinner from './Spinner';
 
 interface State {
 	email: string;
 	password: string;
 	error: string;
+	isLoading: boolean;
 }
 
 interface Style {
@@ -22,20 +24,30 @@ class LoginForm extends Component<State> {
 		email: '',
 		password: '',
 		error: '',
+		isLoading: false,
 	};
 
 	onPress = () => {
 		const { email, password } = this.state;
-		auth()
+
+		this.setState({ error: '', isLoading: true });
+		return auth()
 			.signInWithEmailAndPassword(email, password)
-			.catch(() => {
-				auth()
-					.createUserWithEmailAndPassword(email, password)
-					.catch(() => {
-						this.setState({ error: 'Authentication Failed!' });
-					});
-			});
+			.then(this.onLoginSuccess)
+			.catch(() => auth()
+				.createUserWithEmailAndPassword(email, password)
+				.then(this.onLoginSuccess)
+				.catch(this.onLoginFailure));
 	};
+
+	onLoginSuccess = () => this.setState({
+		email: '',
+		password: '',
+		error: '',
+		isLoading: false,
+	});
+
+	onLoginFailure = () => this.setState({ error: 'Authentication Failed!', isLoading: false });
 
 	onChangeEmail = (email: string) => this.setState({ email });
 
@@ -53,12 +65,18 @@ class LoginForm extends Component<State> {
 					/>
 				</CardSection>
 				<CardSection>
-					<Input secure label="Password" value={this.state.password} onChange={this.onChangePass} />
+					<Input
+						placeholder="************"
+						secure
+						label="Password"
+						value={this.state.password}
+						onChange={this.onChangePass}
+					/>
 				</CardSection>
 				<CardSection>
-					<Button text="Authenticate" onPress={this.onPress} />
+					{this.state.isLoading ? <Spinner /> : <Button text="Authenticate" onPress={this.onPress} />}
 				</CardSection>
-				{this.state.error && <Text style={styles.errorText}>{this.state.error}</Text>}
+				<Text style={styles.errorText}>{this.state.error}</Text>
 			</Card>
 		);
 	}
