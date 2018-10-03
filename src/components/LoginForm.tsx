@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Text, StyleSheet, TextStyle } from 'react-native';
+import { auth } from 'firebase';
 
 import Button from './Button';
 import Card from './Card';
@@ -8,16 +10,31 @@ import CardSection from './CardSection';
 interface State {
 	email: string;
 	password: string;
+	error: string;
+}
+
+interface Style {
+	errorText: TextStyle;
 }
 
 class LoginForm extends Component<State> {
 	state = {
 		email: '',
 		password: '',
+		error: '',
 	};
 
-	onPress = (e: any) => {
-		console.log(e);
+	onPress = () => {
+		const { email, password } = this.state;
+		auth()
+			.signInWithEmailAndPassword(email, password)
+			.catch(() => {
+				auth()
+					.createUserWithEmailAndPassword(email, password)
+					.catch(() => {
+						this.setState({ error: 'Authentication Failed!' });
+					});
+			});
 	};
 
 	onChangeEmail = (email: string) => this.setState({ email });
@@ -41,9 +58,18 @@ class LoginForm extends Component<State> {
 				<CardSection>
 					<Button text="Authenticate" onPress={this.onPress} />
 				</CardSection>
+				{this.state.error && <Text style={styles.errorText}>{this.state.error}</Text>}
 			</Card>
 		);
 	}
 }
+
+const styles = StyleSheet.create<Style>({
+	errorText: {
+		fontSize: 20,
+		alignSelf: 'center',
+		color: 'red',
+	},
+});
 
 export default LoginForm;
