@@ -15,6 +15,7 @@
 		"linebreak-style": [true, "LF"],
 		"jsdoc-format": true,
 		"jsx-boolean-value": false,
+		"jsx-no-multiline-js": false,
 		"label-position": true,
 		"label-undefined": true,
 		"max-line-length": [true, 140],

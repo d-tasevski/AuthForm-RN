@@ -19,7 +19,7 @@ interface Style {
 	errorText: TextStyle;
 }
 
-class LoginForm extends Component<State> {
+class LoginForm extends Component<{}, State> {
 	state = {
 		email: '',
 		password: '',
